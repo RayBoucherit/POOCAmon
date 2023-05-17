@@ -1,13 +1,5 @@
 # POCA 2023
 
-## Group
-
-- BAYARD Léa - 71600375
-- Berkhais Alexandre - 71502230
-- KACEM-CHAOUCHE Nicolas - 21902350
-- DELEPINE Théophile - 71502349
-- BOUCHERIT Rayane - 71702017
-
 ## Prerequisite
 
 - Install Node.js
