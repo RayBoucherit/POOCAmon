@@ -1,0 +1,138 @@
+diff --git a/apps/api/db/migrations/20230213105223_add_user/migration.sql b/apps/api/db/migrations/20230213105223_add_user/migration.sql
+new file mode 100644
+index 0000000..9c3c9b2
+--- /dev/null
++++ b/apps/api/db/migrations/20230213105223_add_user/migration.sql
+@@ -0,0 +1,11 @@
++-- CreateTable
++CREATE TABLE "User" (
++    "id" SERIAL NOT NULL,
++    "name" TEXT NOT NULL,
++    "password" TEXT NOT NULL,
++
++    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
++);
++
++-- CreateIndex
++CREATE UNIQUE INDEX "User_name_key" ON "User"("name");
+diff --git a/apps/api/db/schema.prisma b/apps/api/db/schema.prisma
+index 17b10f4..bcb016e 100644
+--- a/apps/api/db/schema.prisma
++++ b/apps/api/db/schema.prisma
+@@ -20,4 +20,10 @@ model Trainer {
+   id    Int     @id @default(autoincrement())
+   name  String
+   gender String
++}
++
++model User{
++  id Int @id @default(autoincrement())
++  name String @unique
++  password String
+ }
+\ No newline at end of file
+diff --git a/apps/api/prisma/schema.prisma b/apps/api/prisma/schema.prisma
+deleted file mode 100644
+index acbcb84..0000000
+--- a/apps/api/prisma/schema.prisma
++++ /dev/null
+@@ -1,17 +0,0 @@
+-// This is your Prisma schema file,
+-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+-
+-generator client {
+-  provider = "prisma-client-js"
+-}
+-
+-datasource db {
+-  provider = "postgresql"
+-  url      = env("DATABASE_URL")
+-}
+-
+-model User{
+-  id Int @id @default(autoincrement())
+-  name String @unique
+-  password String
+-}
+\ No newline at end of file
+diff --git a/apps/api/src/infrastructure/user.repository.ts b/apps/api/src/infrastructure/user.repository.ts
+new file mode 100644
+index 0000000..fa8304b
+--- /dev/null
++++ b/apps/api/src/infrastructure/user.repository.ts
+@@ -0,0 +1,14 @@
++import {prisma} from "../../db";
++
++export class UserRepository {
++  async create(name: string,password: string): Promise<any> {
++      const card = await prisma.user.create({
++          data: {
++              name,
++              password,
++          },
++      });
++
++      return card;
++  }
++}
+\ No newline at end of file
+diff --git a/apps/api/src/modules/user/user.api.ts b/apps/api/src/modules/user/user.api.ts
+index a80ed72..69e6d56 100644
+--- a/apps/api/src/modules/user/user.api.ts
++++ b/apps/api/src/modules/user/user.api.ts
+@@ -1,7 +1,7 @@
+ import {FastifyInstance} from "fastify";
+ import { createUser } from "./user.service";
+ 
+-export const registerTrainerRoutes = (server: FastifyInstance) => {
++export const registerUserRoutes = (server: FastifyInstance) => {
+     server.route<{
+         Body: { name: string, password: string },
+     }>({
+@@ -14,7 +14,7 @@ export const registerTrainerRoutes = (server: FastifyInstance) => {
+                     name: { type: 'string' },
+                     password: { type: 'string' },
+                 },
+-                required: ['name', 'gender']
++                required: ['name', 'password']
+             }
+         },
+         handler: async (request, reply) => {
+diff --git a/apps/api/src/modules/user/user.service.ts b/apps/api/src/modules/user/user.service.ts
+index 5ba675b..c6b4b42 100644
+--- a/apps/api/src/modules/user/user.service.ts
++++ b/apps/api/src/modules/user/user.service.ts
+@@ -1,4 +1,4 @@
+-import prisma from "../../utils/prisma";
++import {prisma} from "../../../db";
+ 
+ export async function createUser(n: string, p: string) {
+     const user = await prisma.user.create({
+@@ -7,4 +7,5 @@ export async function createUser(n: string, p: string) {
+             password:p,
+         }
+     });
++    return user;
+ }
+\ No newline at end of file
+diff --git a/apps/api/src/server.ts b/apps/api/src/server.ts
+index e99f730..6a95ea6 100644
+--- a/apps/api/src/server.ts
++++ b/apps/api/src/server.ts
+@@ -3,6 +3,7 @@ import {registerTrainerRoutes} from "./api/trainer.api";
+ import {initTrainerContainer} from "./domain/trainer.container";
+ import {registerCardsRoutes} from "./api/cards.api";
+ import {initCardsContainer} from "./domain/cards.container";
++import {registerUserRoutes} from "./modules/user/user.api";
+ 
+ const server: FastifyInstance = fastify({
+     logger: {
+@@ -22,7 +23,7 @@ const start = async () => {
+         registerTrainerRoutes(server, trainerContainer);
+         const cardsContainer = initCardsContainer()
+         registerCardsRoutes(server, cardsContainer);
+-
++        registerUserRoutes(server);
+ 
+         await server.listen({
+             host: process.env.HOST,

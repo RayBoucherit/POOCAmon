@@ -1,0 +1,70 @@
+Arguments: 
+  /usr/bin/node /mnt/c/Users/kacem/AppData/Roaming/npm/node_modules/yarn/bin/yarn.js dev
+
+PATH: 
+  /home/nico/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/Go/bin:/mnt/c/Program Files/Microsoft SQL Server/150/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/nodejs/:/mnt/c/TDM-GCC-64/bin:/mnt/c/MinGW/bin:/mnt/c/Users/kacem/scoop/shims:/mnt/c/Users/kacem/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/kacem/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/kacem/go/bin:/mnt/c/Users/kacem/.dotnet/tools:/mnt/c/Users/kacem/AppData/Roaming/npm:/mnt/c/Users/kacem/AppData/Local/Programs/MiKTeX/miktex/bin/x64/:/snap/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  14.21.2
+
+Platform: 
+  linux x64
+
+Trace: 
+  SyntaxError: /mnt/c/Users/kacem/Desktop/poca/poca/apps/api/package.json: Unexpected token < in JSON at position 439
+      at JSON.parse (<anonymous>)
+      at /mnt/c/Users/kacem/AppData/Roaming/npm/node_modules/yarn/lib/cli.js:1629:59
+      at Generator.next (<anonymous>)
+      at step (/mnt/c/Users/kacem/AppData/Roaming/npm/node_modules/yarn/lib/cli.js:310:30)
+      at /mnt/c/Users/kacem/AppData/Roaming/npm/node_modules/yarn/lib/cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "poca-api",
+    "version": "0.0.1",
+    "description": "API for POCA project",
+    "main": "dist/src/server.js",
+    "license": "MIT",
+    "devDependencies": {
+      "@types/node": "^18.11.18",
+      "nodemon": "^2.0.20",
+      "pino-pretty": "^9.1.1",
+      "prisma": "^4.8.1",
+      "ts-node": "^10.9.1",
+      "typescript": "^4.9.4",
+      "vitest": "^0.26.3"
+    },
+    "dependencies": {
+      "@fastify/cors": "^8.2.0",
+      "@prisma/client": "^4.8.1",
+  <<<<<<< HEAD
+  =======
+      "@fastify/cors": "^8.2.0",
+  >>>>>>> origin/main
+      "@types/react": "^18.0.28",
+      "fastify": "^4.11.0",
+      "react": "^18.2.0"
+    },
+    "prisma": {
+      "schema": "db/schema.prisma",
+      "seed": "ts-node db/seed.ts"
+    },
+    "scripts": {
+      "build": "tsc -p ./tsconfig.json",
+      "build-and-start": "yarn build && yarn start",
+      "db:migrate": "prisma migrate dev",
+      "db:start": "docker-compose up -d db",
+      "dev": "yarn build -w & nodemon dist/src/index.js",
+      "start": "node dist/src/server.js",
+      "test": "vitest"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

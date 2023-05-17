@@ -1,0 +1,44 @@
+li:hover .item-image {
+   display:block;
+}
+  
+.item-image {
+  display: none;
+}
+
+h2{
+  color: blue;
+}
+
+.cartes{
+  display: flex;
+  flex-direction: column;
+  padding: 2px;
+}
+
+.bu{
+  padding: 5px 10px;
+  margin: 2px;
+}
+
+.Board {
+  background: url(../images/background-board.webp) no-repeat center;
+  background-size: cover;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 0px;
+  padding-top: 10px;
+}
+h2 {
+  text-align: center;
+}
+
+.Affiche-deck {
+  padding-top: 55px;
+}
+
+.Affiche-liste {
+  padding-top: 55px;
+}

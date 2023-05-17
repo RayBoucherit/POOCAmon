@@ -1,0 +1,29 @@
+
+button {
+  padding: 20px 80px;
+  text-align: center;
+  background-color:rgb(4, 50, 236);
+  color : white;
+  text-shadow: 1px 3px #282c34;
+  text-decoration: none;
+  font-size: 20px;
+  font-family: sans-serif;
+  font-weight: bolder;
+  border-radius: 30px;
+  border: none;
+  border-bottom: 3px solid #0e2f8a;
+}
+
+button:active {
+  transform: translate(0px, 4px);
+  -webkit-transform: translate(0px,4px);
+  border-bottom: 1px solid #0e2f8a;
+}
+
+.button-cards {
+  margin-top: 10px;
+}
+
+.button-cards:active {
+  margin-top: 12px;
+}

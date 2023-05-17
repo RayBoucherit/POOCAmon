@@ -1,0 +1,45 @@
+
+.Register-header {
+    background-color: rgb(4, 50, 236);
+    color: white;
+    display: flex;
+    border-bottom: 3px solid #0e2f8a;
+    flex-direction: column;
+    align-items: center;
+    text-shadow: 1px 2px #282c34;
+}
+
+.Register {
+    background-color: #282c34;
+    min-height: 100vh;
+    background:url(
+        "../images/pocachu-background2.jpg"
+    ) no-repeat center;
+}
+
+.Register-form {
+    padding-top: 10px;
+}
+
+.Register-nav {
+    display: flex;
+}
+
+.Register-nav li {
+    margin: 10px;
+    margin-bottom: 2px;
+    color: white;
+    text-shadow: none;
+}
+
+.Register-btt {
+    padding: 17px 70px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    
+}
+
+.Register-btt:active {
+    border: 2px solid white;
+    margin-bottom: 9px;
+}
